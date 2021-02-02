@@ -34,6 +34,8 @@ public class Kanji implements Serializable{
 	
 	private String radicals;
 	
+	private Integer numberOfUse;
+	
 	@Version
 	private int version;
 	
@@ -87,6 +89,14 @@ public class Kanji implements Serializable{
 		this.radicals = radicals;
 	}
 	
+	public Integer getNumberOfUse() {
+		return numberOfUse;
+	}
+
+	public void setNumberOfUse(Integer numberOfUse) {
+		this.numberOfUse = numberOfUse;
+	}
+
 	public int getVersion() {
 		return version;
 	}
@@ -121,7 +131,7 @@ public class Kanji implements Serializable{
 	@Override
 	public String toString() {
 		return "{ Id : " + this.id +" , Kanji : " + this.kanji + ", Pronunciation : " + this.pronunciation + " , Meaning : " + this.meaning +
-				" , Strokes number : " + this.strokeNumber + ", Radicals : " + this.radicals + " }" ;
+				" , Strokes number : " + this.strokeNumber + ", Radicals : " + this.radicals + ", Number of use : " + this.numberOfUse + " , version : " + this.version + " }" ;
 	}
 	
 	

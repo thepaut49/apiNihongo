@@ -19,6 +19,8 @@ public class KanjiDTO  {
 
 	private String radicals;
 	
+	private Integer numberOfUse;
+	
 	@Version
 	private int version;
 	
@@ -70,6 +72,14 @@ public class KanjiDTO  {
 
 	public void setRadicals(String radicals) {
 		this.radicals = radicals;
+	}
+	
+	public Integer getNumberOfUse() {
+		return numberOfUse;
+	}
+
+	public void setNumberOfUse(Integer numberOfUse) {
+		this.numberOfUse = numberOfUse;
 	}
 
 	public int getVersion() {

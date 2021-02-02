@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.thepaut49.nihongo.model.Kanji;
 
@@ -32,6 +31,7 @@ public interface KanjiRepository extends JpaRepository<Kanji, Integer> {
 	
 	List<Kanji> findByKanjiIn(List<Character> characters);
 
-
+	@Query(nativeQuery = true, value = "SELECT * FROM Kanji k ORDER BY k.number_of_use DESC LIMIT :quantity ")
+	List<Kanji> findMostUsedKanji(Integer quantity);
 
 }

@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +23,7 @@ import com.thepaut49.nihongo.service.KanjiService;
 
 @RestController
 @RequestMapping("/kanjis")
+@CrossOrigin(maxAge = 3600)
 public class KanjiController {
 
 	@Autowired
@@ -37,6 +40,11 @@ public class KanjiController {
 		Kanji updatedKanji = KanjiToDTOMapper.map(kanjiDTO);  
 		updatedKanji.setId(id);
 		return KanjiToDTOMapper.map(kanjiService.updateKanji(updatedKanji));
+	}
+	
+	@PatchMapping("/{id}")
+	public KanjiDTO updateKanjiNumberOfUse( @PathVariable Integer id) {
+		return KanjiToDTOMapper.map(kanjiService.updateKanjiNumberOfUse(id));
 	}
 
 
@@ -72,6 +80,15 @@ public class KanjiController {
 	@GetMapping("/findKanjiInSentence")
 	public List<KanjiDTO> findKanjiInSentence(@RequestBody String sentence) { 
 		List<Kanji> kanjis = kanjiService.listOfKanjiContainedinSentence(sentence);
+		return kanjis
+				.stream()
+				.map(kanji -> KanjiToDTOMapper.map(kanji))
+				.collect(Collectors.toList());
+	}
+	
+	@GetMapping("/findMostUsedKanji/{quantity}")
+	public List<KanjiDTO> findMostUsedKanji(@PathVariable Integer quantity) { 
+		List<Kanji> kanjis = kanjiService.findMostUsedKanji(quantity);
 		return kanjis
 				.stream()
 				.map(kanji -> KanjiToDTOMapper.map(kanji))

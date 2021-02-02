@@ -14,6 +14,7 @@ public class KanjiToDTOMapper {
 		kanjiDTO.setRadicals(kanji.getRadicals());
 		kanjiDTO.setStrokeNumber(kanji.getStrokeNumber());
 		kanjiDTO.setVersion(kanji.getVersion());
+		kanjiDTO.setNumberOfUse(kanji.getNumberOfUse());
 		
 		kanjiDTO.setPronunciation(new HashSet<String>());
 		String[] pronunciations = kanji.getPronunciation().split(";");
@@ -36,6 +37,7 @@ public class KanjiToDTOMapper {
 		kanji.setRadicals(kanjiDTO.getRadicals());
 		kanji.setStrokeNumber(kanjiDTO.getStrokeNumber());
 		kanji.setVersion(kanjiDTO.getVersion());
+		kanji.setNumberOfUse(kanjiDTO.getNumberOfUse());
 		
 		String pronunciationTemp = "";
 		for(String pronunciation : kanjiDTO.getPronunciation()) {

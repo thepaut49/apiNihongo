@@ -21,6 +21,7 @@ public class KanjiService {
 	
 	public Kanji createKanji(Kanji newKanji) {
 		if (!kanjiRepository.existsByKanji(newKanji.getKanji())) {
+			newKanji.setNumberOfUse(1);
 			return kanjiRepository.save(newKanji);
 		}
 		else {
@@ -70,6 +71,16 @@ public class KanjiService {
 	
 	public List<Kanji> listOfKanjiContainedinSentence(String sentence) {
 		return kanjiRepository.findByKanjiIn(StringUtils.convertStringToCharList(sentence));
+	}
+
+	public Kanji updateKanjiNumberOfUse(Integer id) {
+		Kanji kanji = kanjiRepository.findById(id).get();
+		kanji.setNumberOfUse(kanji.getNumberOfUse() + 1);
+		return kanjiRepository.save(kanji);
+	}
+
+	public List<Kanji> findMostUsedKanji(Integer quantity) {
+		return kanjiRepository.findMostUsedKanji(quantity);
 	}
 
 }
