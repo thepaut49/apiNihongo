@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.thepaut49.nihongo.dto.KanjiCriteriaDTO;
 import com.thepaut49.nihongo.exception.ResourceAlreadyExistException;
 import com.thepaut49.nihongo.model.Kanji;
 import com.thepaut49.nihongo.repository.KanjiRepository;
+import com.thepaut49.nihongo.utils.StringUtils;
 
 @Service
 public class KanjiService {
@@ -53,6 +55,21 @@ public class KanjiService {
 	
 	public List<Kanji> findAll() {
 		return kanjiRepository.findAll();
+	}
+	
+	public List<Kanji> findWithCriteria(KanjiCriteriaDTO criteria) {
+		Character kanji = criteria.getKanji();
+		String meaning = criteria.getMeaning();
+		String pronunciation = criteria.getPronunciation();
+		String radicals = criteria.getRadicals();
+		Integer strokeNumber = criteria.getStrokeNumber();
+		Integer minStrokeNumber = criteria.getMinStrokeNumber();
+		Integer maxStrokeNumber = criteria.getMaxStrokeNumber();	
+		return kanjiRepository.findWithCriteria(kanji, pronunciation, meaning, radicals, strokeNumber, minStrokeNumber, maxStrokeNumber);
+	}
+	
+	public List<Kanji> listOfKanjiContainedinSentence(String sentence) {
+		return kanjiRepository.findByKanjiIn(StringUtils.convertStringToCharList(sentence));
 	}
 
 }

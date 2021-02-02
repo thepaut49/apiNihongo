@@ -9,17 +9,29 @@ import org.springframework.data.repository.query.Param;
 import com.thepaut49.nihongo.model.Kanji;
 
 public interface KanjiRepository extends JpaRepository<Kanji, Integer> {
-	
+
 	boolean existsByKanji(char kanji);
 
 	Kanji findByKanji(char kanji);
-	
-	//@Query("SELECT * FROM Kanji k WHERE lower(k.pronunciation) like lower(%:pronunciation%) ORDER BY k.strokeNumber")
-	//List<Kanji> findByPrononciation(@Param("pronunciation")String pronunciation);
-	
+
+	List<Kanji> findByPronunciationIgnoreCaseLike(String pronunciation);
+
 	List<Kanji> findByStrokeNumber(Integer strokeNumber);
+
+	List<Kanji> findByMeaningIgnoreCaseLike(String meaning);
+
+	@Query("SELECT k FROM Kanji k WHERE (:kanji is null or k.kanji = :kanji) "
+			+ " and (:pronunciation is null or k.pronunciation LIKE  LOWER(concat('%', concat(:pronunciation, '%'))))"
+			+ " and (:meaning is null or k.meaning LIKE  LOWER(concat('%', concat(:meaning, '%'))))"
+			+ " and (:radicals is null or k.radicals LIKE  LOWER(concat('%', concat(:radicals, '%'))))"
+			+ " and (:strokeNumber is null or k.strokeNumber = :strokeNumber)"
+			+ " and (:minStrokeNumber is null or k.strokeNumber >= :minStrokeNumber)"
+			+ " and (:maxStrokeNumber is null or k.strokeNumber <= :maxStrokeNumber)")
+	List<Kanji> findWithCriteria(Character kanji, String pronunciation, String meaning, String radicals, Integer strokeNumber, Integer minStrokeNumber, Integer maxStrokeNumber);
 	
-	//@Query("SELECT * FROM Kanji k WHERE lower(k.meaning) like lower(%:meaning%) ORDER BY k.strokeNumber")
-	//List<Kanji> findByMeaning(@Param("meaning")String meaning);
+	
+	List<Kanji> findByKanjiIn(List<Character> characters);
+
+
 
 }

@@ -21,7 +21,7 @@ public class Kanji implements Serializable{
 	private Integer id;
 	
 	@Column(nullable = false, unique = true)
-	private char kanji;
+	private Character kanji;
 	
 	@Column(nullable = false)
 	private String pronunciation;
@@ -47,11 +47,11 @@ public class Kanji implements Serializable{
 		this.id = id;
 	}
 
-	public char getKanji() {
+	public Character getKanji() {
 		return kanji;
 	}
 
-	public void setKanji(char kanji) {
+	public void setKanji(Character kanji) {
 		this.kanji = kanji;
 	}
 
@@ -95,12 +95,12 @@ public class Kanji implements Serializable{
 		this.version = version;
 	}
 	
-	/*** overrided methods ***/
+	/*** override methods ***/
 
 	@Override
 	public int hashCode() {
 		final int PRIME = 31;
-        int hashcode = Character.valueOf(this.kanji).hashCode();
+        int hashcode = this.kanji.hashCode();
         return new HashCodeBuilder(hashcode%2==0?hashcode+1:hashcode, PRIME).toHashCode();
 	}
 
@@ -110,7 +110,7 @@ public class Kanji implements Serializable{
 			return false;
 		}
 		Kanji otherKanji = (Kanji) obj;
-		if (this.kanji == otherKanji.getKanji()) {
+		if (this.kanji.equals(otherKanji.getKanji())) {
 			return true;
 		}
 		else {
