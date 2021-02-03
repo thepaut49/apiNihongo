@@ -21,9 +21,9 @@ import com.thepaut49.nihongo.mapper.KanjiToDTOMapper;
 import com.thepaut49.nihongo.model.Kanji;
 import com.thepaut49.nihongo.service.KanjiService;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/kanjis")
-@CrossOrigin(maxAge = 3600)
 public class KanjiController {
 
 	@Autowired
