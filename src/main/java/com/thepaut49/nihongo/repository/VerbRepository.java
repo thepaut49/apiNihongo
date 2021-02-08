@@ -13,7 +13,7 @@ public interface VerbRepository extends JpaRepository<Verb, Integer> {
 
 	Verb findByNeutralForm(String neutralForm);
 
-	@Query("SELECT v FROM Verb v WHERE (:neutralForm is null or v.neutralForm = :neutralForm) "
+	@Query("SELECT v FROM Verb v WHERE (:neutralForm is null or v.neutralForm LIKE  LOWER(concat('%', concat(:neutralForm, '%')))) "
 			+ " and (:pronunciation is null or v.pronunciation LIKE  LOWER(concat('%', concat(:pronunciation, '%'))))"
 			+ " and (:meaning is null or v.meaning LIKE  LOWER(concat('%', concat(:meaning, '%'))))"
 			+ " and (:groupe is null or v.groupe LIKE  LOWER(concat('%', concat(:groupe, '%'))))")
