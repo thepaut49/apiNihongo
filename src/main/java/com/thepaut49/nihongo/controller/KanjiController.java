@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thepaut49.nihongo.dto.KanjiCriteriaDTO;
@@ -58,6 +60,11 @@ public class KanjiController {
 	public KanjiDTO search( @PathVariable Integer id) {
 		return KanjiToDTOMapper.map(kanjiService.search(id));
 	}
+	
+	@GetMapping(value = "/findByKanji/{kanji}")
+	public KanjiDTO findWithKanji( @PathVariable String kanji) {
+		return KanjiToDTOMapper.map(kanjiService.findByKanji(kanji));
+	}
 
 	@GetMapping("/all")
 	public List<KanjiDTO> getAllKanjis() {
@@ -69,11 +76,22 @@ public class KanjiController {
 	}
 
 	@GetMapping("/findWithCriteria")
-	public List<KanjiDTO> getAllKanjisAccortingToCriteria(@RequestBody KanjiCriteriaDTO kanjiCriteriaDTO) { 
+	@ResponseBody
+	public List<KanjiDTO> getAllKanjisAccortingToCriteria( @RequestParam(required = false) Character kanji,@RequestParam(required = false) String pronunciation, @RequestParam(required = false) String meaning,
+			@RequestParam(required = false) Integer strokeNumber,@RequestParam(required = false) Integer minStrokeNumber, @RequestParam(required = false) Integer maxStrokeNumber, @RequestParam(required = false) String radicals ) { 
+		KanjiCriteriaDTO kanjiCriteriaDTO = new KanjiCriteriaDTO();
+		kanjiCriteriaDTO.setKanji(kanji);
+		kanjiCriteriaDTO.setPronunciation(pronunciation);
+		kanjiCriteriaDTO.setMeaning(meaning);
+		kanjiCriteriaDTO.setStrokeNumber(strokeNumber);
+		kanjiCriteriaDTO.setMinStrokeNumber(minStrokeNumber);
+		kanjiCriteriaDTO.setMaxStrokeNumber(maxStrokeNumber);
+		kanjiCriteriaDTO.setRadicals(radicals);
+		
 		List<Kanji> kanjis = kanjiService.findWithCriteria(kanjiCriteriaDTO);
 		return kanjis
 				.stream()
-				.map(kanji -> KanjiToDTOMapper.map(kanji))
+				.map(lKanji -> KanjiToDTOMapper.map(lKanji))
 				.collect(Collectors.toList());
 	}
 	

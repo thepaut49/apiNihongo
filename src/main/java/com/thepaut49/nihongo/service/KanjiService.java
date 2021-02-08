@@ -83,4 +83,8 @@ public class KanjiService {
 		return kanjiRepository.findMostUsedKanji(quantity);
 	}
 
+	public Kanji findByKanji(String kanji) {
+		return kanjiRepository.findByKanji( kanji.charAt(0));
+	}
+
 }
