@@ -23,7 +23,7 @@ public class Kanji implements Serializable{
 	@Column(nullable = false, unique = true)
 	private Character kanji;
 	
-	@Column(nullable = false)
+	@Column(nullable = false , length = 50)
 	private String pronunciation;
 	
 	@Column(nullable = false)
@@ -32,6 +32,7 @@ public class Kanji implements Serializable{
 	@Column(nullable = false)
 	private Integer strokeNumber;
 	
+	@Column(length = 50)
 	private String radicals;
 	
 	private Integer numberOfUse;
