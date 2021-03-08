@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thepaut49.nihongo.dto.ObjectDTO;
 import com.thepaut49.nihongo.dto.VerbCriteriaDTO;
 import com.thepaut49.nihongo.dto.VerbDTO;
+import com.thepaut49.nihongo.mapper.ObjectDTOMapper;
 import com.thepaut49.nihongo.mapper.VerbToDTOMapper;
 import com.thepaut49.nihongo.model.Verb;
 import com.thepaut49.nihongo.service.VerbService;
@@ -93,12 +95,12 @@ public class VerbController {
 	}
 	
 	
-	@GetMapping("/findMostUsedVerb/{quantity}")
-	public List<VerbDTO> findMostUsedVerbs(@PathVariable Integer quantity) { 
+	@GetMapping("/findMostUsedVerbs/{quantity}")
+	public List<ObjectDTO> findMostUsedVerbs(@PathVariable Integer quantity) { 
 		List<Verb> verbs = verbService.findMostUsedVerbs(quantity);
 		return verbs
 				.stream()
-				.map(verb -> VerbToDTOMapper.map(verb))
+				.map(verb -> ObjectDTOMapper.map(verb))
 				.collect(Collectors.toList());
 	}
 

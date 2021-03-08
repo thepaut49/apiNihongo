@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thepaut49.nihongo.dto.IAdjectiveCriteriaDTO;
 import com.thepaut49.nihongo.dto.IAdjectiveDTO;
+import com.thepaut49.nihongo.dto.ObjectDTO;
 import com.thepaut49.nihongo.mapper.IAdjectiveToDTOMapper;
+import com.thepaut49.nihongo.mapper.ObjectDTOMapper;
 import com.thepaut49.nihongo.model.IAdjective;
 import com.thepaut49.nihongo.service.IAdjectiveService;
 
@@ -91,12 +93,12 @@ public class IAdjectiveController {
 	}
 	
 	
-	@GetMapping("/findMostUsedIAdjective/{quantity}")
-	public List<IAdjectiveDTO> findMostUsedIAdjectives(@PathVariable Integer quantity) { 
+	@GetMapping("/findMostUsedIAdjectives/{quantity}")
+	public List<ObjectDTO> findMostUsedIAdjectives(@PathVariable Integer quantity) { 
 		List<IAdjective> iAdjectives = iAdjectiveService.findMostUsedIAdjectives(quantity);
 		return iAdjectives
 				.stream()
-				.map(iAdjective -> IAdjectiveToDTOMapper.map(iAdjective))
+				.map(iAdjective -> ObjectDTOMapper.map(iAdjective))
 				.collect(Collectors.toList());
 	}
 

@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thepaut49.nihongo.dto.NameCriteriaDTO;
 import com.thepaut49.nihongo.dto.NameDTO;
+import com.thepaut49.nihongo.dto.ObjectDTO;
 import com.thepaut49.nihongo.mapper.NameToDTOMapper;
+import com.thepaut49.nihongo.mapper.ObjectDTOMapper;
 import com.thepaut49.nihongo.model.Name;
 import com.thepaut49.nihongo.service.NameService;
 
@@ -91,12 +93,12 @@ public class NameController {
 	}
 	
 	
-	@GetMapping("/findMostUsedName/{quantity}")
-	public List<NameDTO> findMostUsedNames(@PathVariable Integer quantity) { 
+	@GetMapping("/findMostUsedNames/{quantity}")
+	public List<ObjectDTO> findMostUsedNames(@PathVariable Integer quantity) { 
 		List<Name> names = nameService.findMostUsedNames(quantity);
 		return names
 				.stream()
-				.map(name -> NameToDTOMapper.map(name))
+				.map(name -> ObjectDTOMapper.map(name))
 				.collect(Collectors.toList());
 	}
 

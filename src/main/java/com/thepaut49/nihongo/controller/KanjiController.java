@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thepaut49.nihongo.dto.KanjiCriteriaDTO;
 import com.thepaut49.nihongo.dto.KanjiDTO;
+import com.thepaut49.nihongo.dto.ObjectDTO;
 import com.thepaut49.nihongo.mapper.KanjiToDTOMapper;
+import com.thepaut49.nihongo.mapper.ObjectDTOMapper;
 import com.thepaut49.nihongo.model.Kanji;
 import com.thepaut49.nihongo.service.KanjiService;
 
@@ -105,11 +107,11 @@ public class KanjiController {
 	}
 	
 	@GetMapping("/findMostUsedKanji/{quantity}")
-	public List<KanjiDTO> findMostUsedKanji(@PathVariable Integer quantity) { 
+	public List<ObjectDTO> findMostUsedKanji(@PathVariable Integer quantity) { 
 		List<Kanji> kanjis = kanjiService.findMostUsedKanji(quantity);
 		return kanjis
 				.stream()
-				.map(kanji -> KanjiToDTOMapper.map(kanji))
+				.map(kanji -> ObjectDTOMapper.map(kanji))
 				.collect(Collectors.toList());
 	}
 

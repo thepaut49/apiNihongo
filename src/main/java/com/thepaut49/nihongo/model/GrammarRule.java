@@ -13,7 +13,7 @@ import javax.persistence.Version;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
-public class Particule implements Serializable {
+public class GrammarRule implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -21,9 +21,9 @@ public class Particule implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false, unique = true, length = 5)
-	private String kanjis;
-
+	@Column(nullable = false, length = 50)
+	private String title;
+	
 	@Lob
 	@Column(nullable = false)
 	private String htmlDescription;
@@ -40,13 +40,13 @@ public class Particule implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getKanjis() {
-		return kanjis;
+
+	public String getTitle() {
+		return title;
 	}
 
-	public void setKanjis(String kanjis) {
-		this.kanjis = kanjis;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getHtmlDescription() {
@@ -69,7 +69,7 @@ public class Particule implements Serializable {
 	@Override
 	public int hashCode() {
 		final int PRIME = 31;
-		int stringHashCode = this.kanjis.hashCode();
+		int stringHashCode = this.title.hashCode();
         return new HashCodeBuilder(stringHashCode%2==0?stringHashCode+1:stringHashCode, PRIME).toHashCode();
 	}
 
@@ -78,8 +78,8 @@ public class Particule implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		Particule otherParticule = (Particule) obj;
-		if (this.kanjis.equals(otherParticule.getKanjis())) {
+		GrammarRule otherGrammarRule = (GrammarRule) obj;
+		if (this.title.equals(otherGrammarRule.getTitle())) {
 			return true;
 		}
 		else {
@@ -89,7 +89,7 @@ public class Particule implements Serializable {
 
 	@Override
 	public String toString() {
-		return " Particule : { Id : " + this.id + " , Kanjis : " + this.kanjis + " , Html description : " + this.htmlDescription + " , Version : " + this.version + " }" ;
+		return " GrammarRule : { Id : " + this.id +" , Title : " + this.title + " , Html description : " + this.htmlDescription + " , Version : " + this.version + " }" ;
 	}
 
 }

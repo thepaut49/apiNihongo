@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thepaut49.nihongo.dto.ObjectDTO;
 import com.thepaut49.nihongo.dto.WordCriteriaDTO;
 import com.thepaut49.nihongo.dto.WordDTO;
+import com.thepaut49.nihongo.mapper.ObjectDTOMapper;
 import com.thepaut49.nihongo.mapper.WordToDTOMapper;
 import com.thepaut49.nihongo.model.Word;
 import com.thepaut49.nihongo.service.WordService;
@@ -91,12 +93,12 @@ public class WordController {
 	}
 	
 	
-	@GetMapping("/findMostUsedWord/{quantity}")
-	public List<WordDTO> findMostUsedWords(@PathVariable Integer quantity) { 
+	@GetMapping("/findMostUsedWords/{quantity}")
+	public List<ObjectDTO> findMostUsedWords(@PathVariable Integer quantity) { 
 		List<Word> words = wordService.findMostUsedWords(quantity);
 		return words
 				.stream()
-				.map(word -> WordToDTOMapper.map(word))
+				.map(word -> ObjectDTOMapper.map(word))
 				.collect(Collectors.toList());
 	}
 

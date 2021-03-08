@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thepaut49.nihongo.dto.NaAdjectiveCriteriaDTO;
 import com.thepaut49.nihongo.dto.NaAdjectiveDTO;
+import com.thepaut49.nihongo.dto.ObjectDTO;
 import com.thepaut49.nihongo.mapper.NaAdjectiveToDTOMapper;
+import com.thepaut49.nihongo.mapper.ObjectDTOMapper;
 import com.thepaut49.nihongo.model.NaAdjective;
 import com.thepaut49.nihongo.service.NaAdjectiveService;
 
@@ -91,12 +93,12 @@ public class NaAdjectiveController {
 	}
 	
 	
-	@GetMapping("/findMostUsedNaAdjective/{quantity}")
-	public List<NaAdjectiveDTO> findMostUsedNaAdjectives(@PathVariable Integer quantity) { 
+	@GetMapping("/findMostUsedNaAdjectives/{quantity}")
+	public List<ObjectDTO> findMostUsedNaAdjectives(@PathVariable Integer quantity) { 
 		List<NaAdjective> naAdjectives = naAdjectiveService.findMostUsedNaAdjectives(quantity);
 		return naAdjectives
 				.stream()
-				.map(naAdjective -> NaAdjectiveToDTOMapper.map(naAdjective))
+				.map(naAdjective -> ObjectDTOMapper.map(naAdjective))
 				.collect(Collectors.toList());
 	}
 
