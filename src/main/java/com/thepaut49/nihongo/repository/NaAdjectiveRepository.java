@@ -18,7 +18,7 @@ public interface NaAdjectiveRepository extends JpaRepository<NaAdjective, Intege
 			+ " and (:meaning is null or v.meaning LIKE  LOWER(concat('%', concat(:meaning, '%'))))")
 	List<NaAdjective> findWithCriteria(String kanjis, String pronunciation, String meaning);
 
-	@Query(nativeQuery = true, value = "SELECT * FROM NaAdjective v ORDER BY v.number_of_use DESC LIMIT :quantity ")
+	@Query(nativeQuery = true, value = "SELECT * FROM na_adjective v ORDER BY v.number_of_use DESC LIMIT :quantity ")
 	List<NaAdjective> findMostUsedNaAdjectives(Integer quantity);
 
 }

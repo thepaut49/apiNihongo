@@ -18,7 +18,7 @@ public interface IAdjectiveRepository extends JpaRepository<IAdjective, Integer>
 			+ " and (:meaning is null or v.meaning LIKE  LOWER(concat('%', concat(:meaning, '%'))))")
 	List<IAdjective> findWithCriteria(String kanjis, String pronunciation, String meaning);
 
-	@Query(nativeQuery = true, value = "SELECT * FROM IAdjective v ORDER BY v.number_of_use DESC LIMIT :quantity ")
+	@Query(nativeQuery = true, value = "SELECT * FROM iadjective v ORDER BY v.number_of_use DESC LIMIT :quantity ")
 	List<IAdjective> findMostUsedIAdjectives(Integer quantity);
 
 }
