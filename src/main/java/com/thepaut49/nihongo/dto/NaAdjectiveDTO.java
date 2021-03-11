@@ -8,7 +8,7 @@ public class NaAdjectiveDTO {
 	
 	private String kanjis;
 	
-	private String pronunciation;
+	private Set<String> pronunciation;
 	
 	private Set<String> meaning;
 	
@@ -34,11 +34,11 @@ public class NaAdjectiveDTO {
 		this.kanjis = neutralForm;
 	}
 
-	public String getPronunciation() {
+	public Set<String> getPronunciation() {
 		return pronunciation;
 	}
 
-	public void setPronunciation(String pronunciation) {
+	public void setPronunciation(Set<String> pronunciation) {
 		this.pronunciation = pronunciation;
 	}
 
