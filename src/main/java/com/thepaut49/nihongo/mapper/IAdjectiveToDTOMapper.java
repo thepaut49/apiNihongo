@@ -13,7 +13,11 @@ public class IAdjectiveToDTOMapper {
 		iAdjectiveDTO.setKanjis(iAdjective.getKanjis());
 		iAdjectiveDTO.setVersion(iAdjective.getVersion());
 		iAdjectiveDTO.setNumberOfUse(iAdjective.getNumberOfUse());
-		iAdjectiveDTO.setPronunciation(iAdjective.getPronunciation());
+		iAdjectiveDTO.setPronunciation(new HashSet<String>());
+		String[] pronunciations = iAdjective.getPronunciation().split(";");
+		for(int index = 0; index < pronunciations.length; index++) {
+			iAdjectiveDTO.getPronunciation().add(pronunciations[index].replace(";", ""));	
+		}
 		iAdjectiveDTO.setMeaning(new HashSet<String>());
 		String[] meanings = iAdjective.getMeaning().split(";");
 		for(int index = 0; index < meanings.length; index++) {
@@ -28,7 +32,13 @@ public class IAdjectiveToDTOMapper {
 		iAdjective.setKanjis(iAdjectiveDTO.getKanjis());
 		iAdjective.setVersion(iAdjectiveDTO.getVersion());
 		iAdjective.setNumberOfUse(iAdjectiveDTO.getNumberOfUse());
-		iAdjective.setPronunciation(iAdjectiveDTO.getPronunciation());
+		
+		String pronunciationTemp = "";
+		for(String pronunciation : iAdjectiveDTO.getPronunciation()) {
+			pronunciationTemp += pronunciation + ";";	
+		}
+		iAdjective.setPronunciation(pronunciationTemp);
+		
 		String meaningTemp = "";
 		for(String meaning : iAdjectiveDTO.getMeaning()) {
 			meaningTemp += meaning + ";";	

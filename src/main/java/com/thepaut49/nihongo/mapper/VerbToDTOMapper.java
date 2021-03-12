@@ -14,7 +14,11 @@ public class VerbToDTOMapper {
 		verbDTO.setGroupe(verb.getGroupe());
 		verbDTO.setVersion(verb.getVersion());
 		verbDTO.setNumberOfUse(verb.getNumberOfUse());
-		verbDTO.setPronunciation(verb.getPronunciation());
+		verbDTO.setPronunciation(new HashSet<String>());
+		String[] pronunciations = verb.getPronunciation().split(";");
+		for(int index = 0; index < pronunciations.length; index++) {
+			verbDTO.getPronunciation().add(pronunciations[index].replace(";", ""));	
+		}
 		verbDTO.setMeaning(new HashSet<String>());
 		String[] meanings = verb.getMeaning().split(";");
 		for(int index = 0; index < meanings.length; index++) {
@@ -30,7 +34,11 @@ public class VerbToDTOMapper {
 		verb.setGroupe(verbDTO.getGroupe());
 		verb.setVersion(verbDTO.getVersion());
 		verb.setNumberOfUse(verbDTO.getNumberOfUse());
-		verb.setPronunciation(verbDTO.getPronunciation());
+		String pronunciationTemp = "";
+		for(String pronunciation : verbDTO.getPronunciation()) {
+			pronunciationTemp += pronunciation + ";";	
+		}
+		verb.setPronunciation(pronunciationTemp);
 		String meaningTemp = "";
 		for(String meaning : verbDTO.getMeaning()) {
 			meaningTemp += meaning + ";";	
