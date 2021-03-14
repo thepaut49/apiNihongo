@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Version;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -23,10 +22,18 @@ public class Particule implements Serializable {
 	
 	@Column(nullable = false, unique = true, length = 5)
 	private String kanjis;
-
-	@Lob
+	
 	@Column(nullable = false)
-	private String htmlDescription;
+	private String summary;
+
+	@Column
+	private String particuleFunction;
+	
+	@Column
+	private String howToUse;
+	
+	@Column( length = 500 )
+	private String examples;
 	
 	@Version
 	private int version;
@@ -48,15 +55,39 @@ public class Particule implements Serializable {
 	public void setKanjis(String kanjis) {
 		this.kanjis = kanjis;
 	}
-
-	public String getHtmlDescription() {
-		return htmlDescription;
+	
+	public String getSummary() {
+		return summary;
 	}
 
-	public void setHtmlDescription(String htmlDescription) {
-		this.htmlDescription = htmlDescription;
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getParticuleFunction() {
+		return particuleFunction;
+	}
+
+	public void setParticuleFunction(String function) {
+		this.particuleFunction = function;
+	}
+
+	public String getHowToUse() {
+		return howToUse;
+	}
+
+	public void setHowToUse(String howToUse) {
+		this.howToUse = howToUse;
 	}
 	
+	public String getExamples() {
+		return examples;
+	}
+
+	public void setExamples(String examples) {
+		this.examples = examples;
+	}
+
 	public int getVersion() {
 		return version;
 	}
@@ -89,7 +120,8 @@ public class Particule implements Serializable {
 
 	@Override
 	public String toString() {
-		return " Particule : { Id : " + this.id + " , Kanjis : " + this.kanjis + " , Html description : " + this.htmlDescription + " , Version : " + this.version + " }" ;
+		return " Particule : { Id : " + this.id + " , Kanjis : " + this.kanjis + " , Summary : " + this.summary +
+				" , Function : " + this.particuleFunction + " , How to use : " + this.howToUse  + " , Version : " + this.version + " }" ;
 	}
 
 }

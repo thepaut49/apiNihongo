@@ -64,5 +64,4 @@ public class ParticuleController {
 				.map(particule -> ParticuleToDTOMapper.map(particule))
 				.collect(Collectors.toList());
 	}
-	
 }

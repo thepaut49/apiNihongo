@@ -9,7 +9,10 @@ public class ParticuleToDTOMapper {
 		ParticuleDTO particuleDTO = new ParticuleDTO();
 		particuleDTO.setId(particule.getId());
 		particuleDTO.setKanjis(particule.getKanjis());
-		particuleDTO.setHtmlDescription(particule.getHtmlDescription());
+		particuleDTO.setSummary(particule.getSummary());
+		particuleDTO.setFunction(particule.getParticuleFunction());
+		particuleDTO.setHowToUse(particule.getHowToUse());
+		particuleDTO.setExamples(particule.getExamples());
 		particuleDTO.setVersion(particule.getVersion());
 		return particuleDTO;
 	}
@@ -18,7 +21,10 @@ public class ParticuleToDTOMapper {
 		Particule particule = new Particule();
 		particule.setId(particuleDTO.getId());
 		particule.setKanjis(particuleDTO.getKanjis());
-		particule.setHtmlDescription(particuleDTO.getHtmlDescription());
+		particule.setSummary(particuleDTO.getSummary());
+		particule.setParticuleFunction(particuleDTO.getFunction());
+		particule.setHowToUse(particuleDTO.getHowToUse());
+		particule.setExamples(particuleDTO.getExamples());
 		particule.setVersion(particuleDTO.getVersion());
 		return particule;
 	}
