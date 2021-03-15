@@ -21,7 +21,7 @@ import com.thepaut49.nihongo.service.GrammarRuleService;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("/grammarrules")
+@RequestMapping("/grammarRules")
 public class GrammarRuleController {
 
 	@Autowired

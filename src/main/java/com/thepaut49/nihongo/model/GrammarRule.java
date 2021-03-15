@@ -28,6 +28,18 @@ public class GrammarRule implements Serializable {
 	@Column(nullable = false)
 	private String htmlDescription;
 	
+	@Column(nullable = false)
+	private String firstKeyWord;
+	
+	@Column
+	private String secondKeyWord;
+	
+	@Column
+	private String thirdKeyWord;
+	
+	@Column
+	private String fourthKeyWord;
+	
 	@Version
 	private int version;
 	
@@ -57,6 +69,38 @@ public class GrammarRule implements Serializable {
 		this.htmlDescription = htmlDescription;
 	}
 	
+	public String getFirstKeyWord() {
+		return firstKeyWord;
+	}
+
+	public void setFirstKeyWord(String firstKeyWord) {
+		this.firstKeyWord = firstKeyWord;
+	}
+
+	public String getSecondKeyWord() {
+		return secondKeyWord;
+	}
+
+	public void setSecondKeyWord(String secondKeyWord) {
+		this.secondKeyWord = secondKeyWord;
+	}
+
+	public String getThirdKeyWord() {
+		return thirdKeyWord;
+	}
+
+	public void setThirdKeyWord(String thirdKeyWord) {
+		this.thirdKeyWord = thirdKeyWord;
+	}
+
+	public String getFourthKeyWord() {
+		return fourthKeyWord;
+	}
+
+	public void setFourthKeyWord(String fourthKeyWord) {
+		this.fourthKeyWord = fourthKeyWord;
+	}
+
 	public int getVersion() {
 		return version;
 	}
@@ -89,7 +133,9 @@ public class GrammarRule implements Serializable {
 
 	@Override
 	public String toString() {
-		return " GrammarRule : { Id : " + this.id +" , Title : " + this.title + " , Html description : " + this.htmlDescription + " , Version : " + this.version + " }" ;
+		return " GrammarRule : { Id : " + this.id +" , Title : " + this.title + " , Html description : " + this.htmlDescription + 
+				" , First Key word : " + this.firstKeyWord + " , Second Key word : " + this.secondKeyWord + " , Third Key word : " + this.thirdKeyWord +
+				" , Fourth Key word : " + this.fourthKeyWord +" , Version : " + this.version + " }" ;
 	}
 
 }
