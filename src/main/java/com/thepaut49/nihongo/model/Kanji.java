@@ -23,7 +23,7 @@ public class Kanji implements Serializable{
 	@Column(nullable = false, unique = true)
 	private Character kanji;
 	
-	@Column(nullable = false , length = 50)
+	@Column(nullable = false , length = 255)
 	private String pronunciation;
 	
 	@Column(nullable = false)
